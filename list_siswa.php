@@ -4,28 +4,30 @@
 
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
-        $jumlah_siswa = "SELECT COUNT(*) 'total' FROM tbl_siswa";
-        $execute_jumlah_siswa = mysqli_query($_AUTH, $jumlah_siswa);
+        //Mencari Jumlah Siswa
+        $jumlah_siswa = "SELECT COUNT(*) 'total' FROM tbl_datasiswa WHERE tbl_datasiswa.id_kelas = 1";
+        $execute_jumlah_siswa = mysqli_query($_AUTH, $jumlah_siswa);   
+        $get_jumlahsiswa = mysqli_fetch_assoc($execute_jumlah_siswa); 
 
-        $mencari_kelas = "SELECT * FROM `db_kampus`.`tbl_kelas` WHERE `id_kelas` = '1'";
-        $executemencarikelas = mysqli_query($_AUTH, $mencari_kelas);
+        $mencari_datasiswa = "SELECT tbl_siswa.nama_siswa, tbl_siswa.jenis_kelamin, tbl_siswa.alamat, tbl_siswa.email, tbl_siswa.tanggal_terdaftar, tbl_datasiswa.id_kelas FROM tbl_siswa";
+        $exe_datasiswa = mysqli_query($_AUTH, $mencari_datasiswa);    
 
-        $wali_kelas = "SELECT nama_guru FROM `db_kampus`.`tbl_guru` WHERE `id_guru` = '$executemencarikelas'";
-        $executemencariwali = mysqli_query($_AUTH, $wali_kelas);
-
-        $mencari_datasiswa = "SELECT tbl_siswa.nama_siswa, tbl_siswa.jenis_kelamin, tbl_siswa.alamat, tbl_siswa.email, tbl_siswa.tanggal_terdaftar FROM tbl_siswa";
+        // // Mecari Wali Kelas
+        // $wali_kelas = "SELECT nama_guru FROM `db_kampus`.`tbl_guru` WHERE `id_guru` = '1'";
+        // $executemencariwali = mysqli_query($_AUTH, $wali_kelas);
+        // $get_walikelas = mysqli_fetch_assoc($executemencariwali);
         
-        $response["message"] = "Data dari kelas X berhasil ditampilkan";
-        $response["code"] = 201;
-        $response["status"] = false;
-        $response['total_datasiswa'] = $execute_jumlah_siswa;
-        $response['wali_kelas'] = $executemencariwali;
+        $response["message"] = trim("data kelas X berhasil ditampilkan");
+        $response["code"] = 200;
+        $response["status"] = true;
+        $response['total_siswa'] = $get_jumlahsiswa ['total'];
+        // $response['wali_kelas'] = $get_walikelas['Nama Guru'];
         $response['datasiswa'] = array();
 
-        while ($row = mysqli_fetch_array($mencari_datasiswa)){
+        while ($row = mysqli_fetch_array($exe_datasiswa)){
             $data = array();
 
-            $data["nama_lengkap"] = $row["nama_lengkap"];
+            $data["nama_siswa"] = $row["nama_siswa"];
             $data["jenis_kelamin"] = $row["jenis_kelamin"];
             $data["alamat"] = $row["alamat"];
             $data["email"] = $row["email"];
@@ -34,8 +36,11 @@
             array_push($response['datasiswa'], $data);
         }
         echo json_encode($response);
+
+
+
     } else {
-        $response['message'] = "API ini memerlukan parameter";
+        $response['message'] = "Need an API";
         $response['code'] = 400;
         $response['status'] = false;
 
