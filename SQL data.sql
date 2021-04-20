@@ -29,7 +29,7 @@ CREATE TABLE tbl_datasiswa(
     id_kelas VARCHAR(60),
     nis VARCHAR(60),
     id_jurusan VARCHAR(60),
-    tanggal_tambah VARCHAR(60),
+    tanggal_tambah TIMESTAMP,
     PRIMARY KEY (id_datasiswa, id_kelas, nis, id_jurusan, tanggal_tambah),
     FOREIGN KEY (id_kelas) REFERENCES tbl_kelas (id_kelas), 
     FOREIGN KEY (nis) REFERENCES tbl_siswa (nis), 
