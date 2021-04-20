@@ -2,7 +2,8 @@ CREATE TABLE tbl_jurusan(
     id_jurusan VARCHAR(60) PRIMARY KEY,
     jurusan TEXT
 );
-CREATE TABLE tbl_kelas id_kelas VARCHAR(60),
+CREATE TABLE tbl_kelas(
+    id_kelas VARCHAR(60),
     kelas TEXT,
     id_guru VARCHAR(60),
     PRIMARY K(id_kelas, id_guru),
@@ -24,18 +25,21 @@ CREATE TABLE tbl_siswa(
     PRIMARY KEY (nis)
 );
 CREATE TABLE tbl_datasiswa(
-    id_datasiswa INT(11) id_kelas VARCHAR(60),
+    id_datasiswa INT(11) AUTO_INCREMENT, 
+    id_kelas VARCHAR(60),
     nis VARCHAR(60),
     id_jurusan VARCHAR(60),
     tanggal_tambah VARCHAR(60),
-    PRIMARY KEY (id_datasis id_kelas, nis, id_jurusan, tanggal_tambah),
-    FOREIGN K(id_kelas) REFERENCES tbl_kel(id_kelas), 
+    PRIMARY KEY (id_datasiswa, id_kelas, nis, id_jurusan, tanggal_tambah),
+    FOREIGN KEY (id_kelas) REFERENCES tbl_kelas (id_kelas), 
     FOREIGN KEY (nis) REFERENCES tbl_siswa (nis), 
     FOREIGN KEY (id_jurusan) REFERENCES tbl_jurusan (id_jurusan)
 );
 
 INSERT INTO tbl_jurusan(id_jurusan, jurusan)
-VALUES ("2","RPL");
+VALUES 
+("RPL","Rekayasa Perangkat Lunak"),
+("TKJ", "Teknik Komputer Jaringan");
 
 INSERT INTO tbl_kel(id_kelas, kelas, id_guru)
 VALUES ("3", "XI", 3);
@@ -64,21 +68,21 @@ VALUES
 
 INSERT INTO tbl_datasiswa (id_kelas, nis, id_jurusan)
 VALUES 
-("1", "120934", "1"),
-("1", "123451", "1"),
-("1", "657483", "2"),
-("1", "432178", "2"),
-("1", "101010", "1"),
-("2", "839198", "2"),
-("2", "280531", "2"),
-("2", "309995", "1"),
-("2", "214444", "1"),
-("2", "131672", "1"),
-("3", "257940", "2"),
-("3", "322060", "1"),
-("3", "321897", "2"),
-("3", "331898", "1"),
-("3", "209519", "2");
+("1", "120934", "RPL"),
+("1", "123451", "TKJ"),
+("1", "657483", "RPL"),
+("1", "432178", "TKJ"),
+("1", "101010", "RPL"),
+("2", "839198", "TKJ"),
+("2", "280531", "RPL"),
+("2", "309995", "TKJ"),
+("2", "214444", "RPL"),
+("2", "131672", "TKJ"),
+("3", "257940", "RPL"),
+("3", "322060", "TKJ"),
+("3", "321897", "RPL"),
+("3", "331898", "TKJ"),
+("3", "209519", "RPL");
 
 
 
