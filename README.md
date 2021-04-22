@@ -12,3 +12,7 @@
 
 - API Delete siswa by NIS
 ![Screenshot API delete_siswa](https://user-images.githubusercontent.com/69703296/115526076-df10c600-a2b9-11eb-93b1-8a139113972e.png)
+
+- API Menampilkan List Siswa
+![Screenshot API list_siswa](https://user-images.githubusercontent.com/69703296/115649944-7cb7d400-a352-11eb-9c87-428691036aa4.png)
+
