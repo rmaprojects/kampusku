@@ -11,7 +11,7 @@
 
         $mencari_datasiswa = "SELECT tbl_siswa.nama_siswa, tbl_siswa.jenis_kelamin, tbl_siswa.alamat, tbl_siswa.email, tbl_siswa.tanggal_terdaftar, tbl_kelas.kelas, tbl_jurusan.jurusan FROM tbl_siswa JOIN tbl_datasiswa ON tbl_siswa.nis=tbl_datasiswa.nis JOIN tbl_jurusan ON tbl_datasiswa.id_jurusan=tbl_jurusan.id_jurusan JOIN tbl_kelas ON tbl_datasiswa.id_kelas=tbl_kelas.id_kelas WHERE tbl_kelas.id_kelas='1'";
         $exe_datasiswa = mysqli_query($_AUTH, $mencari_datasiswa);
-        $get_data = mysqli_fetch_array($_AUTH, $exe_datasiswa);
+        // $get_data = mysqli_fetch_array($_AUTH, $exe_datasiswa);
 
         // // Mecari Wali Kelas
         $wali_kelas = "SELECT nama_guru FROM `db_kampus`.`tbl_guru` WHERE `id_guru` = '1'";
